@@ -16,7 +16,7 @@ import (
 	flag "github.com/ogier/pflag"
 )
 
-const version = 0
+const version = "0.1"
 
 type Runnable struct {
 	Cmd   string `csv:"name"`
@@ -235,7 +235,7 @@ func main() {
 	} else if gc {
 		fmt.Printf("Removed %d items\n", runGC())
 	} else {
-		fmt.Printf("goboom v%d (%s/%s/%s)\n", version, runtime.GOOS, runtime.GOARCH, runtime.Version())
+		fmt.Printf("goboom v%s (%s/%s/%s)\n", version, runtime.GOOS, runtime.GOARCH, runtime.Version())
 		fmt.Println("\nTo actually use goboom execute goboom_run\n")
 		flag.Usage()
 	}
