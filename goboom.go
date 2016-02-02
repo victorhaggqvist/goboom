@@ -70,6 +70,10 @@ func addIfNotContains(items []string, item string) []string {
 }
 
 func openDB() map[string]int {
+	if _, err := os.Stat(dbFilePath); err != nil {
+		return make(map[string]int)
+	}
+
 	list := CmdList{}
 	file, _ := os.Open(dbFilePath)
 	if err := gocsv.UnmarshalFile(file, &list); err != nil {
