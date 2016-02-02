@@ -47,6 +47,7 @@ var (
 	postPhase  bool
 	launcher   bool
 	stats      bool
+	gc         bool
 	dbFilePath string
 	config     Config
 )
@@ -187,11 +188,30 @@ func displayStats() {
 	}
 }
 
+func runGC() int {
+	items := openDB()
+
+	cleanItems := make(map[string]int)
+	removedCount := 0
+
+	for runnable, count := range items {
+		if count > 1 {
+			cleanItems[runnable] = count
+		} else {
+			removedCount = removedCount + 1
+		}
+	}
+
+	writeDB(cleanItems)
+	return removedCount
+}
+
 func main() {
 	flag.BoolVar(&prePhase, "pre", false, "Generate dmenu in")
 	flag.BoolVar(&launcher, "launcher", false, "Output launcher command")
 	flag.BoolVar(&postPhase, "post", false, "Update ranking DB")
 	flag.BoolVar(&stats, "stats", false, "View you statsB")
+	flag.BoolVar(&gc, "gc", false, "Run garbage collection of the DB")
 	flag.Parse()
 
 	loadIni()
@@ -210,9 +230,10 @@ func main() {
 		fmt.Print(input)
 	} else if launcher {
 		fmt.Print("dmenu " + config.DmenuParams)
-
 	} else if stats {
 		displayStats()
+	} else if gc {
+		fmt.Printf("Removed %d items\n", runGC())
 	} else {
 		fmt.Printf("goboom v%d (%s/%s/%s)\n", version, runtime.GOOS, runtime.GOARCH, runtime.Version())
 		fmt.Println("\nTo actually use goboom execute goboom_run\n")
