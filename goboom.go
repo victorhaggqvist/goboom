@@ -46,6 +46,7 @@ var (
 	prePhase   bool
 	postPhase  bool
 	launcher   bool
+	stats      bool
 	dbFilePath string
 	config     Config
 )
@@ -166,10 +167,27 @@ func writeDB(itemSet map[string]int) {
 	}
 }
 
+func displayStats() {
+	items := openDB()
+
+	sortedList := CmdList{}
+	for runnable, count := range items {
+		sortedList = append(sortedList, &Runnable{runnable, count})
+	}
+
+	sort.Sort(sortedList)
+
+	fmt.Println("Name\tLaunch count")
+	for _, i := range sortedList {
+		fmt.Printf("%s\t%d\n", i.Cmd, i.Count)
+	}
+}
+
 func main() {
 	flag.BoolVar(&prePhase, "pre", false, "Generate dmenu in")
 	flag.BoolVar(&launcher, "launcher", false, "Output launcher command")
 	flag.BoolVar(&postPhase, "post", false, "Update ranking DB")
+	flag.BoolVar(&stats, "stats", false, "View you statsB")
 	flag.Parse()
 
 	loadIni()
@@ -188,6 +206,9 @@ func main() {
 		fmt.Print(input)
 	} else if launcher {
 		fmt.Print("dmenu " + config.DmenuParams)
+
+	} else if stats {
+		displayStats()
 	} else {
 		fmt.Printf("goboom v%d (%s/%s/%s)\n", version, runtime.GOOS, runtime.GOARCH, runtime.Version())
 		fmt.Println("\nTo actually use goboom execute goboom_run\n")
