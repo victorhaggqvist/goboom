@@ -1,0 +1,3 @@
+dmenu_params = -b -i -nb black -nf orange -sb black -p ">"
+ignore = X,su
+

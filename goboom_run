@@ -1,0 +1,2 @@
+#!/bin/sh
+goboom --pre | eval $(goboom --launcher) | goboom --post | xargs -I {} sh -c 'exec {} &'
