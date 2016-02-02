@@ -12,13 +12,14 @@ goboom is build using Go 1.5 vendoring and godeps.
     go build goboom.go
 
 ## Install
-
 ```sh
 sudo cp goboom /usr/bin
 sudo cp goboom_run /usr/bin
 mkdir -p ~/.goboom
 cp config.ini.default ~/.goboom/config.ini
 ```
+
+Set your keybinding to `goboom_run`.
 
 ### Migration from xboomx
 goboom will look for a config file in `~/.goboom`.
