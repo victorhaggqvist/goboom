@@ -162,7 +162,7 @@ func writeDB(itemSet map[string]int) {
 		items = append(items, &Runnable{runnable, count})
 	}
 
-	file, err := os.OpenFile(dbFilePath, os.O_RDWR|os.O_CREATE, os.ModePerm)
+	file, err := os.OpenFile(dbFilePath, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0644)
 	if err != nil {
 		panic(err)
 	}
