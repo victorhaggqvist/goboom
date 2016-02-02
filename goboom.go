@@ -210,7 +210,7 @@ func main() {
 	flag.BoolVar(&prePhase, "pre", false, "Generate dmenu in")
 	flag.BoolVar(&launcher, "launcher", false, "Output launcher command")
 	flag.BoolVar(&postPhase, "post", false, "Update ranking DB")
-	flag.BoolVar(&stats, "stats", false, "View you statsB")
+	flag.BoolVar(&stats, "stats", false, "View DB stats")
 	flag.BoolVar(&gc, "gc", false, "Run garbage collection of the DB")
 	flag.Parse()
 
