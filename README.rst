@@ -30,6 +30,10 @@ goboom is built using Go 1.5 vendoring and godeps.
 
 Install
 -------
+goboom is available via AUR as `goboom-bin`. For binary downloads see `releases`_.
+
+.. _releases: https://github.com/victorhaggqvist/goboom/releases/latest
+
 .. code-block:: sh
 
     sudo cp goboom /usr/bin
