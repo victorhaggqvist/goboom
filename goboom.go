@@ -16,7 +16,7 @@ import (
 	flag "github.com/ogier/pflag"
 )
 
-const version = "0.1"
+const version = "0.2"
 
 type Runnable struct {
 	Cmd   string `csv:"name"`
