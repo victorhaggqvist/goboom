@@ -138,9 +138,24 @@ func loadIni() {
 		}
 	}
 
-	config = Config{}
-	if err := ini.MapToWithMapper(&config, ini.TitleUnderscore, iniFile); err != nil {
-		panic(err)
+	config = Config{
+		DmenuParams: "-b -i -nb black -nf orange -sb black -p \">\"",
+		Ignore:      []string{"X", "su"},
+	}
+	if _, err := os.Stat(iniFile); err != nil {
+		newCfg := ini.Empty()
+		newCfg.NameMapper = ini.TitleUnderscore
+
+		err := ini.ReflectFrom(newCfg, &config)
+		if err != nil {
+			panic(err)
+		}
+
+		newCfg.SaveTo(iniFile)
+	} else {
+		if err := ini.MapToWithMapper(&config, ini.TitleUnderscore, iniFile); err != nil {
+			panic(err)
+		}
 	}
 }
 
