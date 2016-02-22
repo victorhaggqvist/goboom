@@ -227,6 +227,12 @@ func main() {
 	flag.BoolVar(&postPhase, "post", false, "Update ranking DB")
 	flag.BoolVar(&stats, "stats", false, "View DB stats")
 	flag.BoolVar(&gc, "gc", false, "Run garbage collection of the DB")
+	flag.Usage = func() {
+		fmt.Printf("goboom v%s (%s/%s/%s)\n", version, runtime.GOOS, runtime.GOARCH, runtime.Version())
+		fmt.Print("\nTo actually use goboom execute goboom_run\n\n")
+		fmt.Println("Options: ")
+		flag.PrintDefaults()
+	}
 	flag.Parse()
 
 	loadIni()
@@ -250,8 +256,6 @@ func main() {
 	} else if gc {
 		fmt.Printf("Removed %d items\n", runGC())
 	} else {
-		fmt.Printf("goboom v%s (%s/%s/%s)\n", version, runtime.GOOS, runtime.GOARCH, runtime.Version())
-		fmt.Println("\nTo actually use goboom execute goboom_run\n")
 		flag.Usage()
 	}
 }
