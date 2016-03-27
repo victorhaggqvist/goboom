@@ -1,22 +1,26 @@
 SHELL = /bin/bash
+VERSION=0.2.1
 
 all:
-	@echo goboom makefile
+	@echo goboom makefile $(VERSION)
 	@echo \"make build\" to build
 
 .PHONY: build
 build:
-	go build goboom.go
+	goxc -pv="$(VERSION)" -build-ldflags='-X main.version=$(VERSION)' xc
 
 .PHONY: package
-package: build
-	tar cf goboom_linux_amd64.tar.xz goboom goboom_run README.rst docs/_build/man/goboom.1
-	sha512sum goboom_linux_amd64.tar.xz > goboom_linux_amd64.tar.xz.sha512sum
+package: man
+	goxc -pv="$(VERSION)" -build-ldflags='-X main.version=$(VERSION)'
 
 .PHONY: html
 html:
-	pushd docs && make html && popd
+	pushd docs && make html SPHINXOPTS="-Dversion=$(VERSION) -Drelease=$(VERSION)" && popd
 
 .PHONY: man
 man:
-	pushd docs && make man && popd
+	pushd docs && make man SPHINXOPTS="-Dversion=$(VERSION) -Drelease=$(VERSION)" && popd
+
+.PHONY: upload
+upload:
+	goxc -pv="$(VERSION)" bintray

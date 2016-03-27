@@ -7,16 +7,15 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
-	"runtime"
 	"sort"
 	"strings"
 
 	"github.com/go-ini/ini"
 	"github.com/gocarina/gocsv"
-	flag "github.com/ogier/pflag"
+	flag "github.com/victorhaggqvist/pflag"
 )
 
-const version = "0.2"
+var version = "0.0.0" // injected at build time
 
 type Runnable struct {
 	Cmd   string `csv:"name"`
@@ -227,8 +226,9 @@ func main() {
 	flag.BoolVar(&postPhase, "post", false, "Update ranking DB")
 	flag.BoolVar(&stats, "stats", false, "View DB stats")
 	flag.BoolVar(&gc, "gc", false, "Run garbage collection of the DB")
+	flag.Version = version
 	flag.Usage = func() {
-		fmt.Printf("goboom v%s (%s/%s/%s)\n", version, runtime.GOOS, runtime.GOARCH, runtime.Version())
+		flag.PrintVersion()
 		fmt.Print("\nTo actually use goboom execute goboom_run\n\n")
 		fmt.Println("Options: ")
 		flag.PrintDefaults()

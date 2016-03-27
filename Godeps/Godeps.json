@@ -1,6 +1,6 @@
 {
-	"ImportPath": "snilius.com/goboom",
-	"GoVersion": "go1.5.3",
+	"ImportPath": "github.com/victorhaggqvist/goboom",
+	"GoVersion": "go1.6",
 	"Deps": [
 		{
 			"ImportPath": "github.com/go-ini/ini",
@@ -12,9 +12,9 @@
 			"Rev": "c9648aef1bdc65989a5db138c92442e3b1370ecc"
 		},
 		{
-			"ImportPath": "github.com/ogier/pflag",
-			"Comment": "v0.0.1-7-g45c278a",
-			"Rev": "45c278ab3607870051a2ea9040bb85fcb8557481"
+			"ImportPath": "github.com/victorhaggqvist/pflag",
+			"Comment": "v0.0.1-8-gde7e394",
+			"Rev": "de7e39409b4761c1704b5c822a8a152f4493a161"
 		}
 	]
 }
