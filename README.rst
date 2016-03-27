@@ -22,12 +22,6 @@ Build
 -----
 goboom is built using Go 1.5 vendoring and godeps.
 
-.. code-block:: sh
-
-    export GO15VENDOREXPERIMENT=1
-    godep get github.com/victorhaggqvist/goboom
-    go build goboom.go
-
 Install
 -------
 goboom is available via AUR as `goboom-bin`. For binary downloads see `releases`_.
